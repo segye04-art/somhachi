@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>솜하치 ✨ Somhachi Official Hub</title>
+  <!-- Google Fonts: Gowun Dodum & Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-pink: #ff6b8b;
+      --soft-pink: #fff0f3;
+      --accent-pink: #ff3b68;
+      --light-pink-bg: #fff8f9;
+      --text-main: #2d2d3a;
+      --text-sub: #6c6c80;
+      --border-color: #ffd6e0;
+      --card-bg: #ffffff;
+      --radius-main: 20px;
+      --shadow-subtle: 0 8px 24px rgba(255, 107, 139, 0.08);
+      --shadow-active: 0 12px 32px rgba(255, 107, 139, 0.15);
+      --tier1-color: #2b9348;
+      --tier1-bg: #e8fccf;
+      --tier2-color: #ff0055;
+      --tier2-bg: #ffe5ec;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Gowun Dodum', 'Pretendard', sans-serif;
+      background-color: var(--light-pink-bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Particles */
+    .click-particle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.4rem;
+      user-select: none;
+      z-index: 9999;
+      animation: heartFloat 0.9s ease-out forwards;
+    }
+
+    @keyframes heartFloat {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+      50% { opacity: 1; transform: translate(-50%, -60px) scale(1.2); }
+      100% { opacity: 0; transform: translate(-50%, -100px) scale(0.9); }
+    }
+
+    /* Header Navigation */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .brand-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary-pink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .social-links { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+    .social-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .btn-chzzk { background: #00e583; color: #000; }
+    .btn-youtube { background: #ff0000; }
+    .btn-discord { background: #5865f2; }
+
+    /* Category Tab Navigation (개선: 잘림 없는 반응형 자동 줄바꿈) */
+    .tab-nav-container {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-subtle);
+      padding: 0.6rem 1rem;
+    }
+
+    .tab-nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap; /* 잘림 방지: 자동으로 다음 줄로 정돈 */
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .tab-btn {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .tab-btn:hover { background: var(--soft-pink); color: var(--primary-pink); border-color: var(--primary-pink); }
+    .tab-btn.active {
+      background: var(--primary-pink);
+      color: #ffffff;
+      border-color: var(--primary-pink);
+      box-shadow: 0 4px 12px rgba(255, 107, 139, 0.3);
+    }
+
+    .tab-btn.sub-azit-btn {
+      background: linear-gradient(135deg, var(--accent-pink), var(--primary-pink));
+      color: #fff;
+      border: none;
+    }
+
+    .tab-btn.admin-tab-btn { background: #312e81; color: #e0e7ff; border: none; }
+    .tab-btn.admin-tab-btn.active { background: #4f46e5; color: #ffffff; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4); }
+
+    /* Main Layout */
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .tab-content { display: none; animation: fadeIn 0.3s ease; }
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-main);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .card-subtitle { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 1.8rem; }
+
+    /* POLAROID FRAME DESIGN */
+    .profile-hero-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .polaroid-frame {
+      background: #ffffff;
+      padding: 14px 14px 28px 14px;
+      border-radius: 6px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+      transform: rotate(-2.5deg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      width: 100%;
+      border: 1px solid #f0f0f0;
+    }
+
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 0 18px 38px rgba(255, 107, 139, 0.22);
+    }
+
+    .polaroid-frame::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+      width: 100px;
+      height: 28px;
+      background: rgba(255, 200, 215, 0.75);
+      border-radius: 2px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      z-index: 10;
+    }
+
+    .polaroid-img-box {
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #f7f7f7;
+    }
+
+    .polaroid-img { width: 100%; height: 100%; object-fit: cover; }
+
+    .polaroid-caption {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-pink);
+      letter-spacing: -0.5px;
+    }
+
+    .photo-change-btn {
+      margin-top: 1rem;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .photo-change-btn:hover { background: var(--soft-pink); color: var(--accent-pink); border-color: var(--primary-pink); }
+
+    /* Rules & Info Cards */
+    .rules-container { display: flex; flex-direction: column; gap: 1.5rem; }
+    .rules-header-box { background: linear-gradient(135deg, #fff0f3, #ffe3e8); border: 2px solid var(--border-color); border-radius: 18px; padding: 1.5rem; text-align: center; }
+    .rules-header-title { font-size: 1.4rem; font-weight: 800; color: var(--accent-pink); margin-bottom: 0.5rem; }
+    .rule-card-box { background: #ffffff; border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-subtle); }
+    .rule-card-title { font-size: 1.15rem; font-weight: 800; color: var(--accent-pink); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px dashed var(--border-color); padding-bottom: 0.5rem; }
+    .rule-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .rule-list li { font-size: 0.95rem; line-height: 1.6; color: #333; position: relative; padding-left: 1.2rem; }
+    .rule-list li::before { content: '🌸'; position: absolute; left: 0; font-size: 0.85rem; }
+    .rule-subtext { display: block; font-size: 0.88rem; color: var(--text-sub); margin-top: 0.2rem; }
+
+    .profile-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+    .info-box { background: var(--light-pink-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 1rem; }
+    .info-icon { width: 46px; height: 46px; border-radius: 12px; background: #ffffff; color: var(--primary-pink); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; border: 1px solid var(--border-color); }
+    .info-text label { font-size: 0.8rem; font-weight: 700; color: var(--text-sub); display: block; margin-bottom: 0.2rem; }
+    .info-text span { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+    .stream-status-card { background: linear-gradient(135deg, #fff0f3, #ffe3e8); border: 1px solid var(--border-color); border-radius: 18px; padding: 1.5rem; margin-top: 1.8rem; display: flex; align-items: center; justify-content: space-between; }
+    .status-live { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; color: var(--text-main); }
+    .pulse-dot { width: 10px; height: 10px; background: var(--primary-pink); border-radius: 50%; box-shadow: 0 0 8px var(--primary-pink); }
+    .timer-text { font-size: 1.6rem; font-weight: 800; color: var(--accent-pink); letter-spacing: 1px; }
+
+    /* Tiers */
+    .tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .tier-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-main); padding: 2.2rem; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s ease; }
+    .tier-card:hover { box-shadow: var(--shadow-active); border-color: var(--primary-pink); }
+    .tier-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .tier-title { font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+    .tier-list { list-style: none; margin-bottom: 2rem; }
+    .tier-list li { margin-bottom: 0.9rem; display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.98rem; line-height: 1.5; color: #444; }
+    .tier-list i { color: var(--primary-pink); margin-top: 0.2rem; }
+    .tier-btn-link { display: block; width: 100%; text-align: center; padding: 0.85rem; border-radius: 12px; font-weight: 700; text-decoration: none; transition: all 0.2s ease; }
+    .tier-1-btn { background: var(--tier1-bg); color: var(--tier1-color); }
+    .tier-2-btn { background: var(--primary-pink); color: #fff; }
+
+    /* Schedule */
+    .schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.2rem; }
+    .schedule-item { background: #ffffff; border: 1px solid var(--border-color); border-radius: 18px; padding: 1.5rem; transition: all 0.2s ease; }
+    .schedule-item.highlight { background: var(--light-pink-bg); border-color: var(--primary-pink); }
+    .schedule-day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; font-weight: 800; font-size: 1.2rem; color: var(--accent-pink); }
+    .schedule-time-badge { font-size: 0.8rem; background: #ffffff; padding: 0.2rem 0.6rem; border-radius: 10px; border: 1px solid var(--border-color); color: var(--text-sub); }
+
+    /* Form Elements */
+    .replay-notice-box { background: var(--light-pink-bg); border: 1px dashed var(--primary-pink); border-radius: 16px; padding: 1.5rem; margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.6; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.4rem; }
+    .form-control { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 12px; font-family: inherit; font-size: 0.95rem; outline: none; background: #ffffff; transition: border-color 0.2s ease; }
+    .form-control:focus { border-color: var(--primary-pink); }
+    .btn-submit-main { background: var(--primary-pink); color: #ffffff; border: none; padding: 0.85rem 2rem; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; width: 100%; transition: background 0.2s ease; }
+    .btn-submit-main:hover { background: var(--accent-pink); }
+
+    .replay-table-wrap { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .replay-card-item { background: #ffffff; border: 1px solid var(--border-color); border-radius: 14px; padding: 1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .replay-card-item.completed { opacity: 0.6; background: #f9f9f9; }
+
+    .badge-tag { font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 8px; font-weight: 700; }
+    .badge-comp { background: var(--soft-pink); color: var(--accent-pink); }
+    .badge-tier1 { background: var(--tier1-bg); color: var(--tier1-color); }
+    .badge-tier2 { background: var(--tier2-bg); color: var(--tier2-color); }
+
+    /* Subscriber Azit */
+    .azit-selection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .azit-card-box { background: #ffffff; border: 2px solid var(--border-color); border-radius: var(--radius-main); padding: 2rem; text-align: center; position: relative; transition: all 0.25s ease; }
+    .azit-card-box.tier-1-box { border-color: #a7f3d0; background: linear-gradient(180deg, #ffffff, #f0fdf4); }
+    .azit-card-box.tier-2-box { border-color: #fbcfe8; background: linear-gradient(180deg, #ffffff, #fdf2f8); }
+    .azit-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+    .azit-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .azit-desc { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 1.5rem; line-height: 1.5; }
+    .azit-pass-form { display: flex; gap: 0.5rem; justify-content: center; max-width: 300px; margin: 0 auto; }
+    .unlocked-azit-view { display: none; animation: fadeIn 0.3s ease; }
+
+    /* Gallery Grid */
+    .gallery-filter-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+    .gallery-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+    .gallery-img-box { width: 100%; height: 230px; background: #f5f5f5; cursor: pointer; overflow: hidden; }
+    .gallery-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .gallery-card:hover .gallery-img-box img { transform: scale(1.05); }
+    .gallery-card-body { padding: 1rem; }
+
+    /* Admin Panel */
+    .admin-card-box { background: #ffffff; border: 2px solid #6366f1; border-radius: 20px; padding: 2rem; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1); }
+    .admin-title-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #4f46e5; color: #fff; padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 800; margin-bottom: 1.2rem; }
+    .pass-display-box { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 0.8rem 1rem; border-radius: 12px; font-family: monospace; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+
+    .sub-table { width: 100%; border-collapse: collapse; margin-top: 1rem; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+    .sub-table th, .sub-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+    .sub-table th { background: var(--soft-pink); color: var(--accent-pink); }
+
+    /* Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box { background: #ffffff; border-radius: 24px; width: 90%; max-width: 520px; max-height: 90vh; overflow-y: auto; padding: 2rem; position: relative; }
+    .modal-close-btn { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--soft-pink); border: none; width: 34px; height: 34px; border-radius: 50%; color: var(--accent-pink); font-size: 1.1rem; cursor: pointer; }
+
+    .comments-wrap { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.5rem; }
+    .comment-item { background: var(--light-pink-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem; }
+
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); background: #ffffff; color: var(--text-sub); font-size: 0.88rem; margin-top: 3rem; }
+
+    @media (max-width: 768px) {
+      .profile-hero-grid, .tiers-grid, .form-row-2, .azit-selection-grid { grid-template-columns: 1fr; }
+      .header-inner { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="brand-logo">
+        <i class="fa-solid fa-heart" style="color:var(--primary-pink); font-size:1.2rem;"></i> 솜하치 Somhachi
+      </a>
+      <div class="social-links">
+        <a href="https://chzzk.naver.com/c0bedd64bed45287a3493479a4cc8295" target="_blank" class="social-btn btn-chzzk">
+          <i class="fa-solid fa-play"></i> 치지직
+        </a>
+        <a href="https://www.youtube.com/@%EC%86%9Ce2" target="_blank" class="social-btn btn-youtube">
+          <i class="fa-brands fa-youtube"></i> 유튜브
+        </a>
+        <a href="https://discord.gg/kYmbREBQe" target="_blank" class="social-btn btn-discord">
+          <i class="fa-brands fa-discord"></i> 디스코드
+        </a>
+        <button class="social-btn" style="background:#4f46e5;" onclick="openAdminTabDirectly()">
+          <i class="fa-solid fa-user-gear"></i> 관리자 센터
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Tab Bar (자동 줄바꿈 최적화) -->
+  <div class="tab-nav-container">
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('profileTab', this)">
+        <i class="fa-solid fa-user-large"></i> 프로필
+      </button>
+      <button class="tab-btn" onclick="switchTab('rulesTab', this)">
+        <i class="fa-solid fa-scroll"></i> 방송 규칙
+      </button>
+      <button class="tab-btn" onclick="switchTab('tiersTab', this)">
+        <i class="fa-solid fa-heart"></i> 구독 혜택
+      </button>
+      <button class="tab-btn" onclick="switchTab('scheduleTab', this)">
+        <i class="fa-solid fa-calendar-days"></i> 스케줄
+      </button>
+      <button class="tab-btn" onclick="switchTab('replayTab', this)">
+        <i class="fa-solid fa-gamepad"></i> 오버워치 리플
+      </button>
+      <button class="tab-btn sub-azit-btn" onclick="switchTab('subAzitTab', this)">
+        <i class="fa-solid fa-key"></i> 구독자 아지트
+      </button>
+      <button class="tab-btn" onclick="switchTab('somhachiGalleryTab', this)">
+        <i class="fa-solid fa-camera-retro"></i> 솜하치 갤러리
+      </button>
+      <button class="tab-btn" onclick="switchTab('guestbookTab', this)">
+        <i class="fa-solid fa-comment-dots"></i> 팬 방명록
+      </button>
+      <button class="tab-btn admin-tab-btn" id="adminTabNavBtn" onclick="switchTab('adminTab', this)">
+        <i class="fa-solid fa-sliders"></i> 관리자 센터 ⚙️
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main>
+
+    <!-- 1. Profile Tab -->
+    <div id="profileTab" class="tab-content active">
+      <div class="card">
+        <div class="profile-hero-grid">
+          <div style="text-align: center;">
+            <div class="polaroid-frame">
+              <div class="polaroid-img-box">
+                <img src="Meligo_Screenshot_2560X1440_20260913_183117_450_0008.jpg" alt="솜하치 프로필 사진" class="polaroid-img" id="mainProfileImg">
+              </div>
+              <div class="polaroid-caption">Somhachi 🎀 솜하치</div>
+            </div>
+            <button class="photo-change-btn" onclick="document.getElementById('profileImgInput').click()">
+              <i class="fa-solid fa-camera"></i> 폴라로이드 사진 변경
+            </button>
+            <input type="file" id="profileImgInput" accept="image/*" style="display: none;" onchange="updateProfileImage(event)">
+          </div>
+
+          <div>
+            <div class="card-title" style="font-size:2.2rem; color:var(--accent-pink);">
+              솜하치 (Somhachi)
+            </div>
+            <div class="card-subtitle">
+              인간 세계에 적응 중인 어설픈 허접악마 VTuber 😈🎀
+            </div>
+
+            <div class="profile-info-grid">
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                <div class="info-text">
+                  <label>생년월일</label>
+                  <span>2002.01.04</span>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-star"></i></div>
+                <div class="info-text">
+                  <label>데뷔일</label>
+                  <span>2025.07.16</span>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+                <div class="info-text">
+                  <label>정기 방송 시간</label>
+                  <span>오후 07:00</span>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-venus"></i></div>
+                <div class="info-text">
+                  <label>성별</label>
+                  <span>여자 (Female)</span>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-ghost"></i></div>
+                <div class="info-text">
+                  <label>종족</label>
+                  <span style="color:var(--accent-pink);">허접악마</span>
+                </div>
+              </div>
+
+              <div class="info-box">
+                <div class="info-icon"><i class="fa-solid fa-heart"></i></div>
+                <div class="info-text">
+                  <label>팬덤명</label>
+                  <span>솜망마 🍬</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stream-status-card">
+              <div class="status-live">
+                <div class="pulse-dot"></div>
+                <span>오늘 방송 카운트다운 (PM 07:00)</span>
+              </div>
+              <div class="timer-text" id="streamCountdown">00:00:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Broadcast Rules Tab -->
+    <div id="rulesTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-scroll"></i> 솜하치 방송 시청 규칙</div>
+        <div class="card-subtitle">모두가 즐겁고 편안한 방송 환경을 만들기 위해 아래 규칙을 꼭 지켜주세요! 🌸</div>
+
+        <div class="rules-container">
+          <div class="rules-header-box">
+            <div class="rules-header-title">╭────────────────────────────╮</div>
+            <div class="rules-header-title">🌸 방송 시청 규칙 🌸</div>
+            <div class="rules-header-title">╰────────────────────────────╯</div>
+            <p style="font-weight: 700; color: var(--text-main); margin-top: 0.5rem;">
+              모두가 즐거운 방송을 위해 아래 규칙을 지켜주세요! 🌸
+            </p>
+          </div>
+
+          <div class="rule-card-box">
+            <div class="rule-card-title">👋 인사 규칙</div>
+            <ul class="rule-list">
+              <li>입장 인사 : <strong>"솜하" 🩷</strong></li>
+              <li>방종 인사 : <strong>"솜바" 🌙</strong></li>
+              <li>"솜바"는 되도록 방송 종료 시에만 사용해주세요.</li>
+              <li>방송을 먼저 나가야 할 경우에는 조용히 나가셔도 괜찮습니다. 😊</li>
+            </ul>
+          </div>
+
+          <div class="rule-card-box">
+            <div class="rule-card-title">💬 채팅 예절</div>
+            <ul class="rule-list">
+              <li>다짜고짜 반말이나 욕설은 삼가주세요.</li>
+              <li>무지성 비난이나 과도한 욕설은 자제해주세요.</li>
+              <li>긁는 채팅은 삼가주세요.</li>
+              <li>무분별한 도배 및 광고·홍보는 금지입니다.</li>
+              <li>방송 중에 <code>~해주세요</code> 채팅 치지 말아주세요.</li>
+              <li>
+                방송과 관련 없는 일기, 메모장 식의 채팅, 과도한 강요는 자제해주세요.💗
+                <span class="rule-subtext">단, 소통 시간에는 편하게 이야기하셔도 됩니다. (단 적정 선은 지켜주세요!)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="rule-card-box">
+            <div class="rule-card-title">📺 방송 관련</div>
+            <ul class="rule-list">
+              <li>
+                타 스트리머 언급이나 스트리머 티 내기는 자제해주세요.
+                <span class="rule-subtext">✅ 솜하치가 먼저 언급한 경우에는 괜찮습니다.</span>
+              </li>
+              <li>이 방송은 솜하치의 방송입니다. 진행 방식은 방장의 판단을 존중해주세요.</li>
+              <li>의견이나 훈수는 제가 먼저 요청할 때 부탁드립니다.</li>
+              <li><strong>😎 훈수는 3만 치즈부터!</strong></li>
+            </ul>
+          </div>
+
+          <div class="rule-card-box">
+            <div class="rule-card-title">🎮 게임 방송 관련</div>
+            <ul class="rule-list">
+              <li>스토리 게임에서는 스포일러 및 과도한 추측 채팅을 자제해주세요.</li>
+              <li>게임과 관련 없는 채팅 금지입니다.</li>
+              <li>훈수는 제가 먼저 물어보거나 요청할 때만 부탁드립니다. ◡̈</li>
+            </ul>
+          </div>
+
+          <div class="rules-header-box" style="background: linear-gradient(135deg, #fff0f3, #ffffff);">
+            <p style="font-weight:800; color:var(--accent-pink); font-size:1.1rem; margin-bottom:0.4rem;">
+              🌸 함께 좋은 방송 만들어가요! 🌸
+            </p>
+            <p style="font-weight:700; color:var(--text-main); margin-bottom:0.8rem;">
+              🌸 모두가 즐거운 방송을 위해 규칙을 꼭 지켜주세요.
+            </p>
+            <p style="font-size:0.88rem; color:#888; line-height:1.5;">
+              위 사항을 지키지 않을 경우 방송 운영 방침에 따라 불이익이 있을 수 있습니다. <br>
+              서로를 존중하며 편안한 분위기에서 즐겨주시면 감사하겠습니다. 🩷
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Subscription Tiers Tab -->
+    <div id="tiersTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-gift"></i> 솜망마 구독자 혜택</div>
+        <div class="card-subtitle">솜하치를 후원해 주시는 구독자 분들을 위한 티어별 특별 혜택 안내입니다.</div>
+
+        <div class="tiers-grid">
+          <div class="tier-card">
+            <div>
+              <div class="tier-header">
+                <div class="tier-title" style="color:var(--tier1-color);">💚 1티어 구독</div>
+              </div>
+              <ul class="tier-list">
+                <li><i class="fa-solid fa-check" style="color:var(--tier1-color);"></i> 소형 네컷 사진</li>
+                <li><i class="fa-solid fa-check" style="color:var(--tier1-color);"></i> 솜하치의 짧은 편지 💌</li>
+                <li><i class="fa-solid fa-check" style="color:var(--tier1-color);"></i> 추가 리플 검수권 1장 🎮</li>
+                <li><i class="fa-solid fa-check" style="color:var(--tier1-color);"></i> 1티어 전용 구독티콘 & 구독뱃지 사용 가능</li>
+              </ul>
+            </div>
+            <a href="https://chzzk.naver.com/c0bedd64bed45287a3493479a4cc8295" target="_blank" class="tier-btn-link tier-1-btn">
+              1티어 구독하러 가기
+            </a>
+          </div>
+
+          <div class="tier-card">
+            <div>
+              <div class="tier-header">
+                <div class="tier-title" style="color:var(--tier2-color);">💓 2티어 구독</div>
+              </div>
+              <ul class="tier-list">
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> <strong>방셀 3장</strong> 📸</li>
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> <strong>대형 네컷 사진</strong></li>
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> <strong>체키 2장</strong> ✨</li>
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> <strong>장문 편지</strong> ✍️</li>
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> <strong>오버워치 추가 리플권 1장</strong></li>
+                <li><i class="fa-solid fa-heart" style="color:var(--tier2-color);"></i> 2티어 전용 구독티콘 & 구독뱃지 사용 가능</li>
+              </ul>
+            </div>
+            <a href="https://chzzk.naver.com/c0bedd64bed45287a3493479a4cc8295" target="_blank" class="tier-btn-link tier-2-btn">
+              2티어 특별 구독하기
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Schedule Tab -->
+    <div id="scheduleTab" class="tab-content">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+          <div class="card-title" style="margin-bottom:0;"><i class="fa-solid fa-calendar-check"></i> 주간 방송 스케줄</div>
+          <button class="photo-change-btn" onclick="openAdminTabDirectly()" style="font-size:0.8rem; padding:0.4rem 0.8rem;">
+            <i class="fa-solid fa-pen"></i> 스케줄 수정 (관리자)
+          </button>
+        </div>
+        <div class="card-subtitle">솜하치의 주간 정기 방송 일정입니다. (관리자 센터에서 수정 가능)</div>
+
+        <div class="schedule-grid" id="publicScheduleGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Overwatch Replay Tab -->
+    <div id="replayTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-gamepad"></i> 오버워치 리플 신청 시스템</div>
+        <div class="card-subtitle">월요일 리플데이에 검수받을 플레이 코드를 아래 양식에 맞게 신청해 주세요.</div>
+
+        <div class="replay-notice-box">
+          <p style="font-weight:800; color:var(--accent-pink); margin-bottom:0.5rem; font-size:1.05rem;">📌 신청 안내 & 규칙</p>
+          <ul style="padding-left:1.2rem; color:#444;">
+            <li>1인당 최대 2개까지 신청 가능합니다.</li>
+            <li>추가 신청은 2,000 치즈부터 가능합니다. (🌸 팔로우 유입은 무료 신청권 1장 지급!)</li>
+            <li>최대 리플 슬롯은 12개입니다. (이후에는 추가 신청만 가능합니다.)</li>
+            <li>모집 마감은 매주 월요일 오후 7시입니다.</li>
+            <li>리플 신청은 리플데이에만 가능합니다.</li>
+            <li>🩷 구독자는 [추가 리플권] 혜택을 이용하실 수 있습니다.</li>
+          </ul>
+        </div>
+
+        <form id="replaySubmitForm" style="background:var(--light-pink-bg); padding:1.5rem; border-radius:16px; border:1px solid var(--border-color);">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>리플 코드 *</label>
+              <input type="text" id="repCode" class="form-control" placeholder="예: X1Y2Z3" required>
+            </div>
+            <div class="form-group">
+              <label>경기 종류 *</label>
+              <select id="repMode" class="form-control" required>
+                <option value="경쟁">경쟁전</option>
+                <option value="빠대">빠른 대전</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>티어 (경쟁전 전용)</label>
+              <input type="text" id="repTier" class="form-control" placeholder="예: 플래티넘 / 티맞">
+            </div>
+            <div class="form-group">
+              <label>닉네임 *</label>
+              <input type="text" id="repNick" class="form-control" placeholder="예: 솜하치" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>간단한 제목 (선택)</label>
+            <input type="text" id="repTitle" class="form-control" placeholder="예: 키리코 팟지">
+          </div>
+
+          <div style="display:flex; gap:1.5rem; margin-bottom:1.2rem; font-size:0.9rem;">
+            <label style="cursor:pointer;"><input type="checkbox" id="repIsSub"> 🩷 구독자 추가 리플권</label>
+            <label style="cursor:pointer;"><input type="checkbox" id="repIsFollow"> 🌸 팔로워 무료 신청권</label>
+          </div>
+
+          <button type="submit" class="btn-submit-main">리플 신청 제출하기</button>
+        </form>
+
+        <div style="margin-top:2rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h3 style="font-size:1.2rem; font-weight:800;">📋 현재 신청된 리플 목록</h3>
+            <span style="font-size:0.88rem; color:var(--text-sub);" id="slotCounterText">슬롯 0 / 12</span>
+          </div>
+
+          <div class="replay-table-wrap" id="replayListContainer">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SUBSCRIBER AZIT TAB -->
+    <div id="subAzitTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-key"></i> 구독자 시크릿 아지트</div>
+        <div class="card-subtitle">솜하치 전달 전용 혜택 공간입니다. 전달받은 비밀번호를 입력하여 혜택을 확인하세요!</div>
+
+        <div id="azitSelectionGrid" class="azit-selection-grid">
+          <div class="azit-card-box tier-1-box">
+            <div class="azit-icon">💚</div>
+            <div class="azit-title" style="color:var(--tier1-color);">1티어 전용 아지트</div>
+            <div class="azit-desc">소형 네컷 + 짧은 편지 + 추가 리플권 혜택</div>
+            <form onsubmit="unlockTierAzit(event, '1티어')" class="azit-pass-form">
+              <input type="password" id="pass1TierInput" class="form-control" placeholder="1티어 비밀번호 입력" required style="text-align:center;">
+              <button type="submit" class="btn-submit-main" style="width:auto; padding:0 1.2rem; background:var(--tier1-color);">입장</button>
+            </form>
+          </div>
+
+          <div class="azit-card-box tier-2-box">
+            <div class="azit-icon">💓</div>
+            <div class="azit-title" style="color:var(--tier2-color);">2티어 전용 아지트</div>
+            <div class="azit-desc">방셀 3장 + 대형 네컷 + 체키 2장 + 장문 편지 + 리플권</div>
+            <form onsubmit="unlockTierAzit(event, '2티어')" class="azit-pass-form">
+              <input type="password" id="pass2TierInput" class="form-control" placeholder="2티어 비밀번호 입력" required style="text-align:center;">
+              <button type="submit" class="btn-submit-main" style="width:auto; padding:0 1.2rem; background:var(--accent-pink);">입장</button>
+            </form>
+          </div>
+        </div>
+
+        <div id="unlockedAzitView" class="unlocked-azit-view">
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--light-pink-bg); padding:1.2rem 1.5rem; border-radius:16px; border:1px solid var(--border-color); margin-bottom:1.5rem;">
+            <div>
+              <span id="unlockedTierTitleBadge" class="badge-tag" style="font-size:1rem; padding:0.3rem 0.8rem;"></span>
+              <span style="font-weight:800; font-size:1.1rem; margin-left:0.5rem; color:var(--text-main);">시크릿 혜택 보관함에 들어왔습니다! 🍬</span>
+            </div>
+            <button class="photo-change-btn" onclick="relockAzit()"><i class="fa-solid fa-lock"></i> 아지트 잠그기</button>
+          </div>
+
+          <div style="margin-bottom:2.5rem;">
+            <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:1rem;">🎁 전달된 전용 방셀 & 혜택 선물함</h3>
+            <div class="gallery-grid" id="benefitGalleryGrid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. SOMHACHI OPEN GALLERY TAB -->
+    <div id="somhachiGalleryTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-camera-retro"></i> 솜하치 갤러리</div>
+        <div class="card-subtitle">모든 팬(솜망마)분들이 자유롭게 방셀, 이벤트 인증, 캡처 사진을 올릴 수 있는 열린 공간입니다! 📸</div>
+
+        <div class="gallery-filter-bar">
+          <div>
+            <button class="photo-change-btn" onclick="filterSomhachiGallery('all')">전체 보기</button>
+            <button class="photo-change-btn" onclick="filterSomhachiGallery('일반 방셀')">📷 일반 방셀</button>
+            <button class="photo-change-btn" onclick="filterSomhachiGallery('이벤트 방셀')">🎉 이벤트 방셀</button>
+            <button class="photo-change-btn" onclick="filterSomhachiGallery('방송 스냅샷')">✨ 방송 스냅샷</button>
+            <button class="photo-change-btn" onclick="filterSomhachiGallery('팬아트/팬인증')">💖 팬아트/팬인증</button>
+          </div>
+          <button class="btn-submit-main" onclick="openSomhachiGalleryModal()" style="width:auto; padding:0.6rem 1.4rem;">
+            <i class="fa-solid fa-plus"></i> 누구나 자유롭게 사진 올리기
+          </button>
+        </div>
+
+        <div class="gallery-grid" id="somhachiGalleryGrid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Guestbook Tab -->
+    <div id="guestbookTab" class="tab-content">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-comment-dots"></i> 솜망마 한줄 응원 방명록</div>
+        <div class="card-subtitle">솜하치에게 응원의 메시지를 남겨보세요!</div>
+
+        <form id="guestbookForm" style="display:grid; grid-template-columns:1fr 2.5fr auto; gap:0.8rem; margin-bottom:1.5rem;">
+          <input type="text" id="gbNick" class="form-control" placeholder="솜망마 닉네임" required>
+          <input type="text" id="gbMsg" class="form-control" placeholder="메시지를 입력하세요..." required>
+          <button type="submit" class="btn-submit-main" style="width:auto; padding:0 1.5rem;">등록</button>
+        </form>
+
+        <div class="comments-wrap" id="commentsContainer">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. DEDICATED STREAMER ADMIN CENTER TAB -->
+    <div id="adminTab" class="tab-content">
+      <div class="admin-card-box">
+        <div class="admin-title-badge">
+          <i class="fa-solid fa-user-shield"></i> 스트리머(솜하치) 전용 설정 관리 센터
+        </div>
+
+        <div id="adminLoginBox" style="text-align:center; padding: 2.5rem 1rem;">
+          <i class="fa-solid fa-lock" style="font-size:3rem; color:#4f46e5; margin-bottom:1rem;"></i>
+          <h2 style="font-size:1.5rem; margin-bottom:0.5rem; font-weight:800;">관리자 인증이 필요합니다</h2>
+          <p style="color:var(--text-sub); font-size:0.9rem; margin-bottom:1.5rem;">
+            스케줄 변경, 비밀번호 관리 및 혜택 사진 업로드는 관리자만 가능합니다. <br>
+            <span style="color:#6366f1; font-size:0.85rem;">(초기 관리자 비밀번호: <code>7777</code>)</span>
+          </p>
+          <form onsubmit="processAdminLogin(event)" style="max-width:320px; margin:0 auto; display:flex; gap:0.5rem;">
+            <input type="password" id="adminPassInput" class="form-control" placeholder="관리자 비밀번호" required style="text-align:center;">
+            <button type="submit" class="btn-submit-main" style="width:auto; background:#4f46e5; padding:0 1.5rem; white-space:nowrap;">로그인</button>
+          </form>
+        </div>
+
+        <div id="adminDashboardBox" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#e0e7ff; padding:1.2rem; border-radius:14px; margin-bottom:2rem; border:1px solid #c7d2fe;">
+            <div>
+              <span style="font-weight:800; color:#3730a3; font-size:1.1rem;">👑 솜하치님, 환영합니다!</span>
+              <span style="font-size:0.85rem; color:#4338ca; display:block; margin-top:0.2rem;">스케줄 변경, 구독자 아지트 비번 및 방셀 선물 관리를 수행하세요.</span>
+            </div>
+            <button class="photo-change-btn" onclick="logoutAdmin()" style="border-color:#a5b4fc; color:#3730a3;"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+          </div>
+
+          <!-- Section A: Schedule Editor -->
+          <div style="background:#fff; border:1px solid var(--border-color); padding:1.5rem; border-radius:16px; margin-bottom:2rem;">
+            <h3 style="font-weight:800; font-size:1.2rem; margin-bottom:1rem; color:var(--accent-pink);">
+              📅 주간 방송 스케줄 직접 수정하기
+            </h3>
+            <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:1.2rem;">
+              각 요일별 방송 시간과 내용을 수정하면 홈페이지 스케줄표에 즉시 반영됩니다!
+            </p>
+
+            <div id="adminScheduleEditorGrid" style="display:flex; flex-direction:column; gap:1rem;">
+              <!-- Rendered via JS -->
+            </div>
+            <button onclick="saveAdminSchedule()" class="btn-submit-main" style="margin-top:1.2rem; background:#4f46e5;">
+              <i class="fa-solid fa-floppy-disk"></i> 변경된 스케줄 저장 및 적용
+            </button>
+          </div>
+
+          <!-- Section B: Passwords & Benefits Upload -->
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.8rem; margin-bottom:2rem;">
+            <div style="background:#fff; border:1px solid var(--border-color); padding:1.5rem; border-radius:16px;">
+              <h3 style="font-weight:800; font-size:1.15rem; margin-bottom:1.2rem; color:#4338ca;">🔑 비밀번호 통합 관리</h3>
+              <div class="pass-display-box"><span>💚 1티어 비번:</span><strong id="display1TierPass" style="color:var(--tier1-color);">****</strong></div>
+              <div class="pass-display-box"><span>💓 2티어 비번:</span><strong id="display2TierPass" style="color:var(--tier2-color);">****</strong></div>
+              <div class="pass-display-box"><span>👑 관리자 비번:</span><strong id="displayAdminPass" style="color:#4f46e5;">****</strong></div>
+
+              <form onsubmit="handleAdminPasswordUpdate(event)" style="margin-top:1rem;">
+                <div class="form-group">
+                  <label>변경 대상</label>
+                  <select id="passTargetType" class="form-control">
+                    <option value="1티어">💚 1티어 비번</option>
+                    <option value="2티어">💓 2티어 비번</option>
+                    <option value="관리자">👑 관리자 비번</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>새 비밀번호</label>
+                  <input type="text" id="newPassValue" class="form-control" placeholder="새 비밀번호 입력" required>
+                </div>
+                <button type="submit" class="btn-submit-main" style="background:#4f46e5;">새로 저장하기</button>
+              </form>
+            </div>
+
+            <div style="background:#fff; border:1px solid var(--border-color); padding:1.5rem; border-radius:16px;">
+              <h3 style="font-weight:800; font-size:1.15rem; margin-bottom:1.2rem; color:var(--accent-pink);">🎁 구독자 전용 혜택/방셀 사진 올리기</h3>
+              <form id="adminBenefitForm">
+                <div class="form-group">
+                  <label>받는 솜망마 닉네임 *</label>
+                  <input type="text" id="adBUpNick" class="form-control" placeholder="예: 초코솜망마" required>
+                </div>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label>구독 티어 *</label>
+                    <select id="adBUpTier" class="form-control" required>
+                      <option value="1티어">💚 1티어 전용</option>
+                      <option value="2티어">💓 2티어 전용</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>혜택 종류 *</label>
+                    <input type="text" id="adBUpCategory" class="form-control" placeholder="예: 방셀 / 네컷" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>이미지 선택 (여러 장 가능)</label>
+                  <input type="file" id="adBUpFiles" class="form-control" accept="image/*" multiple required>
+                </div>
+                <div class="form-group">
+                  <label>편지 메시지</label>
+                  <textarea id="adBUpLetter" class="form-control" rows="2" placeholder="솜망마에게 남기는 메시지..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit-main">시크릿 아지트에 올리기</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Section C: Subscriber List -->
+          <div style="background:#fff; border:1px solid var(--border-color); padding:1.5rem; border-radius:16px;">
+            <h3 style="font-weight:800; font-size:1.15rem; margin-bottom:1rem; color:var(--text-main);">👥 구독자 명단 추가 / 관리</h3>
+            <form onsubmit="addSubscriber(event)" style="display:flex; gap:0.5rem; margin-bottom:1rem; max-width:500px;">
+              <input type="text" id="newSubNick" class="form-control" placeholder="솜망마 닉네임" required>
+              <select id="newSubTier" class="form-control" style="width:130px;">
+                <option value="1티어">💚 1티어</option>
+                <option value="2티어">💓 2티어</option>
+              </select>
+              <button type="submit" class="btn-submit-main" style="width:90px; padding:0; background:#4f46e5;">추가</button>
+            </form>
+
+            <table class="sub-table">
+              <thead>
+                <tr>
+                  <th>닉네임</th>
+                  <th>구독 티어</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody id="adminSubListTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="somhachiGalleryModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="closeSomhachiGalleryModal()"><i class="fa-solid fa-xmark"></i></button>
+      <h3 style="font-size:1.3rem; font-weight:800; margin-bottom:1.2rem; color:var(--accent-pink);">
+        📸 솜하치 갤러리 게시글 작성
+      </h3>
+      <form id="somhachiGalleryForm">
+        <div class="form-group">
+          <label>작성자 닉네임 *</label>
+          <input type="text" id="sgAuthor" class="form-control" placeholder="솜망마 닉네임" required>
+        </div>
+        <div class="form-group">
+          <label>분류 선택 *</label>
+          <select id="sgCategory" class="form-control" required>
+            <option value="일반 방셀">📷 일반 방셀</option>
+            <option value="이벤트 방셀">🎉 이벤트 방셀</option>
+            <option value="방송 스냅샷">✨ 방송 스냅샷</option>
+            <option value="팬아트/팬인증">💖 팬아트/팬인증</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>사진 제목 / 짧은 글 *</label>
+          <input type="text" id="sgTitle" class="form-control" placeholder="예: 오늘 레전드 방송 캡처!" required>
+        </div>
+        <div class="form-group">
+          <label>이미지 선택 (여러 장 가능)</label>
+          <input type="file" id="sgFiles" class="form-control" accept="image/*" multiple required>
+        </div>
+        <button type="submit" class="btn-submit-main" style="margin-top:0.5rem;">갤러리에 올리기</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="photoDetailModal">
+    <div class="modal-box" style="text-align:center;">
+      <button class="modal-close-btn" onclick="closePhotoDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div id="photoDetailContent"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025-2026 Somhachi. All Rights Reserved. 솜망마 Fandom Hub 💖</p>
+  </footer>
+
+  <script>
+    // Tab Switching
+    function switchTab(tabId, btnElement) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      if (btnElement) btnElement.classList.add('active');
+
+      if (tabId === 'adminTab') checkAdminLoginState();
+    }
+
+    function openAdminTabDirectly() {
+      switchTab('adminTab', document.getElementById('adminTabNavBtn'));
+    }
+
+    // Particles
+    const heartSymbols = ['💖', '💕', '💓', '✨', '❤️', '🌸'];
+    document.addEventListener('click', (e) => {
+      if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'A'].includes(e.target.tagName)) return;
+      const particle = document.createElement('div');
+      particle.className = 'click-particle';
+      particle.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      particle.style.left = `${e.pageX}px`;
+      particle.style.top = `${e.pageY}px`;
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 900);
+    });
+
+    // Profile Photo
+    const PROFILE_IMG_KEY = 'somhachi_profile_img_v11';
+    function loadSavedProfileImage() {
+      const savedImg = localStorage.getItem(PROFILE_IMG_KEY);
+      if (savedImg) document.getElementById('mainProfileImg').src = savedImg;
+    }
+
+    function updateProfileImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const imgData = evt.target.result;
+        document.getElementById('mainProfileImg').src = imgData;
+        localStorage.setItem(PROFILE_IMG_KEY, imgData);
+        alert('✨ 폴라로이드 프로필 사진이 업데이트되었습니다!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Timer
+    function updateCountdown() {
+      const now = new Date();
+      let target = new Date();
+      target.setHours(19, 0, 0, 0);
+      if (now > target) target.setDate(target.getDate() + 1);
+      const diff = target - now;
+      const hours = Math.floor(diff / (1000 * 60 * 60)).toString().padStart(2, '0');
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+      document.getElementById('streamCountdown').innerText = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // DYNAMIC SCHEDULE SYSTEM
+    const SCHEDULE_STORAGE_KEY = 'somhachi_schedule_v11';
+    const DEFAULT_SCHEDULE = [
+      { id: 'mon', day: '월요일 (MON)', time: 'PM 07:00', title: '🎮 오버워치 리플 검수 방송', desc: '솜망마 플레이 분석 및 코칭 피드백 진행하는 메인 리플 데이!', highlight: true },
+      { id: 'tue', day: '화요일 (TUE)', time: '휴방', title: '💤 정기 휴방일', desc: '다음 방송 준비 및 쉬어가는 날!', highlight: false },
+      { id: 'wed', day: '수요일 (WED)', time: 'PM 07:00', title: '🎤 고성방가 노래방송', desc: '신나는 애니송 및 귀여운 라이브 우타 타임!', highlight: false },
+      { id: 'thu', day: '목요일 (THU)', time: '휴방', title: '💤 정기 휴방일', desc: '콘텐츠 준비 및 휴식', highlight: false },
+      { id: 'fri', day: '금요일 (FRI)', time: 'PM 07:00', title: '👻 공포게임 & 솜망마 시참', desc: '덜덜 떠는 공포게임 혹은 시청자 멀티 게임 데이!', highlight: false },
+      { id: 'sat', day: '토요일 (SAT)', time: 'PM 07:00', title: '💖 소통 & 구독자 선물 작업', desc: '주간 수다와 함께 구독자분들을 위한 방셀 및 편지 작업 방송!', highlight: false },
+      { id: 'sun', day: '일요일 (SUN)', time: '자율', title: '✨ 게릴라 / 자율 방송', desc: '랜덤 게릴라 방송 가능성 있음!', highlight: false }
+    ];
+
+    function getScheduleData() {
+      return JSON.parse(localStorage.getItem(SCHEDULE_STORAGE_KEY)) || DEFAULT_SCHEDULE;
+    }
+
+    function renderPublicSchedule() {
+      const grid = document.getElementById('publicScheduleGrid');
+      const data = getScheduleData();
+      grid.innerHTML = '';
+
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `schedule-item ${item.highlight ? 'highlight' : ''}`;
+        div.innerHTML = `
+          <div class="schedule-day-header">
+            <span>${escapeHtml(item.day)}</span>
+            <span class="schedule-time-badge">${escapeHtml(item.time)}</span>
+          </div>
+          <p style="font-weight:700; margin-bottom:0.4rem;">${escapeHtml(item.title)}</p>
+          <p style="font-size:0.88rem; color:var(--text-sub);">${escapeHtml(item.desc)}</p>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function renderAdminScheduleEditor() {
+      const container = document.getElementById('adminScheduleEditorGrid');
+      const data = getScheduleData();
+      container.innerHTML = '';
+
+      data.forEach((item, idx) => {
+        const box = document.createElement('div');
+        box.style.cssText = 'background:#f8fafc; border:1px solid #cbd5e1; padding:1rem; border-radius:12px;';
+        box.innerHTML = `
+          <div style="font-weight:800; color:#4338ca; margin-bottom:0.6rem; display:flex; justify-content:space-between;">
+            <span>${escapeHtml(item.day)}</span>
+            <label style="font-size:0.8rem; cursor:pointer;"><input type="checkbox" id="schHigh_${idx}" ${item.highlight ? 'checked' : ''}> 강조(분홍) 표시</label>
+          </div>
+          <div class="form-row-2">
+            <div>
+              <label style="font-size:0.8rem; font-weight:700;">방송 시간 문구</label>
+              <input type="text" id="schTime_${idx}" class="form-control" value="${escapeHtml(item.time)}">
+            </div>
+            <div>
+              <label style="font-size:0.8rem; font-weight:700;">방송 제목 / 콘텐츠</label>
+              <input type="text" id="schTitle_${idx}" class="form-control" value="${escapeHtml(item.title)}">
+            </div>
+          </div>
+          <div style="margin-top:0.5rem;">
+            <label style="font-size:0.8rem; font-weight:700;">상세 설명</label>
+            <input type="text" id="schDesc_${idx}" class="form-control" value="${escapeHtml(item.desc)}">
+          </div>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    function saveAdminSchedule() {
+      const data = getScheduleData();
+      data.forEach((item, idx) => {
+        item.time = document.getElementById(`schTime_${idx}`).value;
+        item.title = document.getElementById(`schTitle_${idx}`).value;
+        item.desc = document.getElementById(`schDesc_${idx}`).value;
+        item.highlight = document.getElementById(`schHigh_${idx}`).checked;
+      });
+
+      localStorage.setItem(SCHEDULE_STORAGE_KEY, JSON.stringify(data));
+      renderPublicSchedule();
+      alert('📅 스케줄표가 업데이트되었습니다!');
+    }
+
+    // Overwatch Replays
+    const REPLAY_KEY = 'somhachi_replays_v11';
+    function getReplays() { return JSON.parse(localStorage.getItem(REPLAY_KEY) || '[]'); }
+    function saveReplays(replays) { localStorage.setItem(REPLAY_KEY, JSON.stringify(replays)); }
+
+    function renderReplayList() {
+      const container = document.getElementById('replayListContainer');
+      const replays = getReplays();
+      document.getElementById('slotCounterText').innerText = `슬롯 ${replays.length} / 12`;
+
+      if (replays.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:1.5rem; color:var(--text-sub); border:1px dashed var(--border-color); border-radius:12px;">신청된 리플이 없습니다.</div>`;
+        return;
+      }
+
+      container.innerHTML = '';
+      replays.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = `replay-card-item ${item.checked ? 'completed' : ''}`;
+        div.innerHTML = `
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleReplayCheck(${index})" style="cursor:pointer;">
+            <span style="font-weight:800; color:var(--accent-pink); font-size:1.1rem;">#${index + 1}</span>
+            <div>
+              <div style="font-weight:800; font-size:1.05rem;">${escapeHtml(item.code)} ${item.title ? `- ${escapeHtml(item.title)}` : ''}</div>
+              <div style="font-size:0.8rem; color:var(--text-sub); display:flex; gap:0.4rem; align-items:center; margin-top:0.2rem;">
+                <span class="badge-tag badge-comp">${item.mode}</span>
+                ${item.tier ? `<span>🏆 ${escapeHtml(item.tier)}</span>` : ''}
+                <span>👤 ${escapeHtml(item.nick)}</span>
+                ${item.isSub ? `<span class="badge-tag badge-tier2">🩷 구독자</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <button class="photo-change-btn" onclick="deleteReplayItem(${index})" style="padding:0.3rem 0.7rem; margin:0; color:#ff4d4d;">삭제</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleReplayCheck(index) {
+      const replays = getReplays();
+      replays[index].checked = !replays[index].checked;
+      saveReplays(replays);
+      renderReplayList();
+    }
+
+    function deleteReplayItem(index) {
+      if (!confirm('삭제하시겠습니까?')) return;
+      const replays = getReplays();
+      replays.splice(index, 1);
+      saveReplays(replays);
+      renderReplayList();
+    }
+
+    document.getElementById('replaySubmitForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = document.getElementById('repCode').value;
+      const mode = document.getElementById('repMode').value;
+      const tier = document.getElementById('repTier').value;
+      const nick = document.getElementById('repNick').value;
+      const title = document.getElementById('repTitle').value;
+      const isSub = document.getElementById('repIsSub').checked;
+      const isFollow = document.getElementById('repIsFollow').checked;
+
+      const replays = getReplays();
+      replays.push({ code, mode, tier, nick, title, isSub, isFollow, checked: false });
+      saveReplays(replays);
+
+      document.getElementById('replaySubmitForm').reset();
+      renderReplayList();
+      alert('리플 신청이 정상 완료되었습니다!');
+    });
+
+    // Passwords & Admin State
+    const TIER1_PASS_KEY = 'somhachi_pass_tier1_v11';
+    const TIER2_PASS_KEY = 'somhachi_pass_tier2_v11';
+    const ADMIN_PASS_KEY = 'somhachi_admin_pass_v11';
+    const SUB_LIST_KEY = 'somhachi_sub_list_v11';
+
+    let currentUnlockedTier = null;
+
+    function getTierPassword(tier) {
+      if (tier === '1티어') return localStorage.getItem(TIER1_PASS_KEY) || '1004';
+      if (tier === '2티어') return localStorage.getItem(TIER2_PASS_KEY) || '2004';
+      return '';
+    }
+
+    function getAdminPassword() { return localStorage.getItem(ADMIN_PASS_KEY) || '7777'; }
+
+    function unlockTierAzit(e, tier) {
+      e.preventDefault();
+      const inputVal = tier === '1티어' ? document.getElementById('pass1TierInput').value : document.getElementById('pass2TierInput').value;
+      if (inputVal === getTierPassword(tier)) {
+        currentUnlockedTier = tier;
+        document.getElementById('azitSelectionGrid').style.display = 'none';
+        document.getElementById('unlockedAzitView').style.display = 'block';
+
+        const badge = document.getElementById('unlockedTierTitleBadge');
+        if (tier === '1티어') {
+          badge.innerText = '💚 1티어 아지트';
+          badge.className = 'badge-tag badge-tier1';
+        } else {
+          badge.innerText = '💓 2티어 아지트';
+          badge.className = 'badge-tag badge-tier2';
+        }
+        renderBenefitGallery();
+      } else {
+        alert(`❌ ${tier} 비밀번호가 올바르지 않습니다.`);
+      }
+    }
+
+    function relockAzit() {
+      currentUnlockedTier = null;
+      document.getElementById('azitSelectionGrid').style.display = 'grid';
+      document.getElementById('unlockedAzitView').style.display = 'none';
+      document.getElementById('pass1TierInput').value = '';
+      document.getElementById('pass2TierInput').value = '';
+    }
+
+    function checkAdminLoginState() {
+      const isLogged = sessionStorage.getItem('somhachi_admin_logged');
+      if (isLogged === 'true') {
+        document.getElementById('adminLoginBox').style.display = 'none';
+        document.getElementById('adminDashboardBox').style.display = 'block';
+        updateAdminPassDisplays();
+        renderAdminScheduleEditor();
+        renderSubList();
+      } else {
+        document.getElementById('adminLoginBox').style.display = 'block';
+        document.getElementById('adminDashboardBox').style.display = 'none';
+      }
+    }
+
+    function processAdminLogin(e) {
+      e.preventDefault();
+      if (document.getElementById('adminPassInput').value === getAdminPassword()) {
+        sessionStorage.setItem('somhachi_admin_logged', 'true');
+        document.getElementById('adminPassInput').value = '';
+        checkAdminLoginState();
+        alert('👑 관리자 전용 센터에 접속되었습니다!');
+      } else {
+        alert('❌ 관리자 비밀번호가 올바르지 않습니다.');
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('somhachi_admin_logged');
+      checkAdminLoginState();
+      alert('로그아웃 되었습니다.');
+    }
+
+    function updateAdminPassDisplays() {
+      document.getElementById('display1TierPass').innerText = getTierPassword('1티어');
+      document.getElementById('display2TierPass').innerText = getTierPassword('2티어');
+      document.getElementById('displayAdminPass').innerText = getAdminPassword();
+    }
+
+    function handleAdminPasswordUpdate(e) {
+      e.preventDefault();
+      const target = document.getElementById('passTargetType').value;
+      const newPass = document.getElementById('newPassValue').value;
+
+      if (!newPass) return;
+      if (target === '1티어') localStorage.setItem(TIER1_PASS_KEY, newPass);
+      else if (target === '2티어') localStorage.setItem(TIER2_PASS_KEY, newPass);
+      else if (target === '관리자') localStorage.setItem(ADMIN_PASS_KEY, newPass);
+
+      document.getElementById('newPassValue').value = '';
+      updateAdminPassDisplays();
+      alert(`🔑 [${target}] 새 비밀번호가 저장되었습니다: ${newPass}`);
+    }
+
+    // Subscriber Management
+    function getSubList() { return JSON.parse(localStorage.getItem(SUB_LIST_KEY) || '[]'); }
+    function addSubscriber(e) {
+      e.preventDefault();
+      const nick = document.getElementById('newSubNick').value;
+      const tier = document.getElementById('newSubTier').value;
+      const list = getSubList();
+      list.push({ nick, tier });
+      localStorage.setItem(SUB_LIST_KEY, JSON.stringify(list));
+      document.getElementById('newSubNick').value = '';
+      renderSubList();
+    }
+
+    function removeSubscriber(idx) {
+      const list = getSubList();
+      list.splice(idx, 1);
+      localStorage.setItem(SUB_LIST_KEY, JSON.stringify(list));
+      renderSubList();
+    }
+
+    function renderSubList() {
+      const tbody = document.getElementById('adminSubListTableBody');
+      const list = getSubList();
+      tbody.innerHTML = '';
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-sub);">등록된 구독자가 없습니다.</td></tr>`;
+        return;
+      }
+      list.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${escapeHtml(item.nick)}</strong></td>
+          <td><span class="badge-tag ${item.tier === '1티어' ? 'badge-tier1' : 'badge-tier2'}">${item.tier}</span></td>
+          <td><button onclick="removeSubscriber(${idx})" style="border:none; background:none; color:#ff4d4d; cursor:pointer;">삭제</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Benefits & Gallery Storage
+    const BENEFITS_STORAGE_KEY = 'somhachi_benefits_v11';
+    const GALLERY_STORAGE_KEY = 'somhachi_gallery_v11';
+
+    function getBenefitsList() { return JSON.parse(localStorage.getItem(BENEFITS_STORAGE_KEY) || '[]'); }
+    function saveBenefitsList(list) { localStorage.setItem(BENEFITS_STORAGE_KEY, JSON.stringify(list)); }
+
+    function getGalleryList() { return JSON.parse(localStorage.getItem(GALLERY_STORAGE_KEY) || '[]'); }
+    function saveGalleryList(list) { localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(list)); }
+
+    function renderBenefitGallery() {
+      const grid = document.getElementById('benefitGalleryGrid');
+      grid.innerHTML = '';
+      const list = getBenefitsList();
+      const filtered = list.filter(b => b.tier === currentUnlockedTier);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:var(--text-sub);">등록된 전용 혜택 게시물이 없습니다.</div>`;
+        return;
+      }
+
+      filtered.reverse().forEach((b) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.innerHTML = `
+          <div class="gallery-img-box" onclick="showPhotoDetail('${escapeHtml(b.recipient)}', '${b.tier}', '${escapeHtml(b.category)}', '${b.imgData}', '${escapeHtml(b.letter)}')">
+            <img src="${b.imgData}">
+          </div>
+          <div class="gallery-card-body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-weight:800;">To. ${escapeHtml(b.recipient)}</span>
+              <span class="badge-tag ${b.tier === '1티어' ? 'badge-tier1' : 'badge-tier2'}">${b.tier}</span>
+            </div>
+            <div style="font-size:0.8rem; color:var(--accent-pink); font-weight:700; margin-top:0.3rem;">${escapeHtml(b.category)}</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('adminBenefitForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const recipient = document.getElementById('adBUpNick').value;
+      const tier = document.getElementById('adBUpTier').value;
+      const category = document.getElementById('adBUpCategory').value;
+      const filesInput = document.getElementById('adBUpFiles');
+      const letter = document.getElementById('adBUpLetter').value;
+
+      if (!filesInput.files || filesInput.files.length === 0) return;
+
+      const files = Array.from(filesInput.files);
+      const benefitsList = getBenefitsList();
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        await new Promise((res) => {
+          reader.onload = function(evt) {
+            benefitsList.push({
+              recipient,
+              tier,
+              category: files.length > 1 ? `${category} (${i+1}/${files.length})` : category,
+              imgData: evt.target.result,
+              letter,
+              date: new Date().toLocaleDateString()
+            });
+            res();
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      saveBenefitsList(benefitsList);
+      document.getElementById('adminBenefitForm').reset();
+      alert('✨ 시크릿 아지트에 고화질 혜택 게시물이 게시되었습니다!');
+    });
+
+    // Gallery
+    let activeGalleryFilter = 'all';
+
+    function renderSomhachiGallery() {
+      const grid = document.getElementById('somhachiGalleryGrid');
+      grid.innerHTML = '';
+      const list = getGalleryList();
+      const filtered = list.filter(p => activeGalleryFilter === 'all' || p.category === activeGalleryFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:var(--text-sub);">갤러리에 등록된 사진이 없습니다. 첫 사진을 등록해보세요! 📸</div>`;
+        return;
+      }
+
+      filtered.reverse().forEach((p) => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        card.innerHTML = `
+          <div class="gallery-img-box" onclick="showPhotoDetail('${escapeHtml(p.author)}', '${escapeHtml(p.category)}', '${escapeHtml(p.title)}', '${p.imgData}', '')">
+            <img src="${p.imgData}">
+          </div>
+          <div class="gallery-card-body">
+            <div style="font-weight:800; font-size:1.05rem;">${escapeHtml(p.title)}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.4rem;">
+              <span class="badge-tag badge-comp">${p.category}</span>
+              <span style="font-size:0.78rem; color:var(--text-sub);">By ${escapeHtml(p.author || '솜망마')}</span>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterSomhachiGallery(cat) {
+      activeGalleryFilter = cat;
+      renderSomhachiGallery();
+    }
+
+    function openSomhachiGalleryModal() { document.getElementById('somhachiGalleryModal').classList.add('active'); }
+    function closeSomhachiGalleryModal() { document.getElementById('somhachiGalleryModal').classList.remove('active'); }
+
+    document.getElementById('somhachiGalleryForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const author = document.getElementById('sgAuthor').value;
+      const category = document.getElementById('sgCategory').value;
+      const title = document.getElementById('sgTitle').value;
+      const filesInput = document.getElementById('sgFiles');
+
+      if (!filesInput.files || filesInput.files.length === 0) return;
+
+      const files = Array.from(filesInput.files);
+      const galleryList = getGalleryList();
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        await new Promise((res) => {
+          reader.onload = function(evt) {
+            galleryList.push({
+              author,
+              category,
+              title: files.length > 1 ? `${title} (${i+1}/${files.length})` : title,
+              imgData: evt.target.result,
+              date: new Date().toLocaleDateString()
+            });
+            res();
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      saveGalleryList(galleryList);
+      closeSomhachiGalleryModal();
+      document.getElementById('somhachiGalleryForm').reset();
+      renderSomhachiGallery();
+      alert('✨ 솜하치 갤러리에 업로드되었습니다!');
+    });
+
+    function showPhotoDetail(name, cat, title, img, letter) {
+      const content = document.getElementById('photoDetailContent');
+      content.innerHTML = `
+        <h3 style="font-size:1.3rem; font-weight:800; color:var(--accent-pink); margin-bottom:0.4rem;">${title}</h3>
+        <p style="font-size:0.85rem; color:var(--text-sub); margin-bottom:1rem;">To/By ${name} • ${cat}</p>
+        <img src="${img}" style="width:100%; max-height:420px; object-fit:contain; border-radius:12px; margin-bottom:1rem; border:1px solid var(--border-color);">
+        ${letter ? `<p style="background:var(--light-pink-bg); padding:1rem; border-radius:12px; font-size:0.95rem; text-align:left; line-height:1.5; margin-bottom:1rem;">${letter}</p>` : ''}
+        <a href="${img}" download="솜하치_사진.png" class="btn-submit-main" style="display:inline-block; text-decoration:none; width:auto; padding:0.6rem 1.4rem;">
+          원본 고화질 다운로드
+        </a>
+      `;
+      document.getElementById('photoDetailModal').classList.add('active');
+    }
+
+    function closePhotoDetailModal() { document.getElementById('photoDetailModal').classList.remove('active'); }
+
+    // Guestbook
+    const GB_KEY = 'somhachi_gb_v11';
+    function loadGuestbook() {
+      const container = document.getElementById('commentsContainer');
+      const list = JSON.parse(localStorage.getItem(GB_KEY) || '[]');
+      container.innerHTML = '';
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; color:var(--text-sub); padding:1rem;">첫 메시지를 남겨보세요! 🍬</div>`;
+        return;
+      }
+
+      list.reverse().forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'comment-item';
+        div.innerHTML = `
+          <div style="font-weight:800; color:var(--accent-pink); font-size:0.9rem;">🍬 ${escapeHtml(c.nick)} <span style="font-size:0.75rem; color:var(--text-sub); font-weight:normal;">(${c.date})</span></div>
+          <div style="margin-top:0.3rem; font-size:0.95rem;">${escapeHtml(c.msg)}</div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('guestbookForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nick = document.getElementById('gbNick').value;
+      const msg = document.getElementById('gbMsg').value;
+      const list = JSON.parse(localStorage.getItem(GB_KEY) || '[]');
+      list.push({ nick, msg, date: new Date().toLocaleDateString() });
+      localStorage.setItem(GB_KEY, JSON.stringify(list));
+      document.getElementById('gbMsg').value = '';
+      loadGuestbook();
+    });
+
+    function escapeHtml(str) {
+      return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") : '';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedProfileImage();
+      renderPublicSchedule();
+      renderReplayList();
+      renderSomhachiGallery();
+      loadGuestbook();
+    });
+  </script>
+</body>
+</html>
