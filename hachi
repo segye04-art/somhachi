@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>솜하치 Hub ✨ 리뉴얼 준비 중</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Gowun Dodum', sans-serif;
+      background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 100%);
+      color: #2d2d3a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 2px solid #ffd6e0;
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 10px 30px rgba(255, 107, 139, 0.12);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ffe5ec;
+      color: #ff0055;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+    }
+
+    .avatar-box {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #ff6b8b;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(255, 107, 139, 0.3);
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      color: #ff3b68;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #6c6c80;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.85rem;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.2s;
+    }
+
+    .btn:active { transform: scale(0.98); }
+    .btn-chzzk { background: #00e583; color: #000; }
+    .btn-youtube { background: #ff0000; }
+    .btn-discord { background: #5865f2; }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">🚧 모바일 리뉴얼 중</div>
+    <div class="avatar-box">🎀</div>
+    <h1>솜하치 Hub</h1>
+    <p>더 예쁘고 편리한 모바일 화면으로<br>열심히 단장하고 있어요! 🛠️<br>잠시만 기다려주세요!</p>
+
+    <div class="links">
+      <a href="https://chzzk.naver.com/c0bedd64bed45287a3493479a4cc8295" target="_blank" class="btn btn-chzzk">
+        <i class="fa-solid fa-play"></i> 치지직 방송 보러가기
+      </a>
+      <a href="https://www.youtube.com/@%EC%86%9Ce2" target="_blank" class="btn btn-youtube">
+        <i class="fa-brands fa-youtube"></i> 유튜브 채널 가기
+      </a>
+      <a href="https://discord.gg/kYmbREBQe" target="_blank" class="btn btn-discord">
+        <i class="fa-brands fa-discord"></i> 공식 디스코드 커뮤니티
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Somhachi Official. All Rights Reserved.
+  </footer>
+
+</body>
+</html>
