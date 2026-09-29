@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>솜하치 버츄얼 홈페이지 & 규칙</title>
+    <!-- Google Fonts: Pretendard -->
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <!-- FontAwesome 아이콘 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #f7a8b8;
+            --light-pink: #fff0f3;
+            --soft-pink-bg: #fcf4f6;
+            --card-bg: #ffffff;
+            --text-main: #4a3b40;
+            --text-sub: #7a6b70;
+            --border-pink: #fce4ec;
+            --shadow-sm: 0 4px 20px rgba(247, 168, 184, 0.12);
+            --radius-round: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--soft-pink-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-round);
+            box-shadow: var(--shadow-sm);
+            padding: 48px 36px;
+            border: 1px solid var(--border-pink);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d9778c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background-color: var(--light-pink);
+            border-radius: var(--radius-round);
+            padding: 32px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            border: 1px solid rgba(247, 168, 184, 0.3);
+        }
+
+        @media (min-width: 576px) {
+            .profile-section {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+            }
+        }
+
+        .profile-img-container {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 12px rgba(217, 119, 140, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .profile-img-container:hover .profile-img {
+            transform: scale(1.03);
+        }
+
+        .profile-img-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #d9778c;
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        #imageUploadInput {
+            display: none;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d9778c;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 576px) {
+            .profile-name {
+                justify-content: flex-start;
+            }
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        @media (min-width: 480px) {
+            .profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .profile-item {
+            display: flex;
+            gap: 8px;
+        }
+
+        .profile-label {
+            font-weight: 600;
+            color: #b55d72;
+            min-width: 70px;
+        }
+
+        .profile-value {
+            color: var(--text-main);
+        }
+
+        /* Rules Sections */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #d9778c;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--light-pink);
+            padding-bottom: 8px;
+        }
+
+        .rule-card {
+            background-color: #faf4f6;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-pink);
+        }
+
+        .rule-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rule-card li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.98rem;
+            color: var(--text-main);
+        }
+
+        .rule-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-pink);
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .rule-card li strong {
+            color: #d9778c;
+        }
+
+        .sub-list {
+            margin-top: 8px;
+            margin-left: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sub-list li::before {
+            content: "-";
+            color: #b55d72;
+        }
+
+        /* Outro */
+        .outro-card {
+            background-color: var(--light-pink);
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            margin-top: 32px;
+            border: 1px solid rgba(217, 119, 140, 0.2);
+        }
+
+        .outro-card h3 {
+            color: #d9778c;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .outro-card p {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fa-solid fa-heart"></i> 솜하치 버츄얼 홈페이지</h1>
+            <p>모두가 즐거운 방송을 위한 시청 가이드 및 규칙</p>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-img-container" id="profileImageContainer" title="클릭해서 사진 변경하기">
+                <!-- 보내주신 솜하치 이미지 파일명 직접 연결 -->
+                <img id="profileImage" src="Meligo_Screenshot_2560X1440_20260913_183124_775_0011.jpg" alt="솜하치 프로필 사진" class="profile-img">
+                <div class="profile-img-overlay">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <input type="file" id="imageUploadInput" accept="image/*">
+            </div>
+            <div class="profile-info">
+                <div class="profile-name">솜하치</div>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <span class="profile-label">활동</span>
+                        <span class="profile-value">버츄얼 스트리머</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">플랫폼</span>
+                        <span class="profile-value">치지직 / 유튜브</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">콘텐츠</span>
+                        <span class="profile-value">게임 / 노래 / 잡담 / 그림</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">팬네임</span>
+                        <span class="profile-value">솜뭉치</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">생일</span>
+                        <span class="profile-value">2002. 01. 04</span>
+                    </div>
+                    <div class="profile-item">
+                        <span class="profile-label">데뷔일</span>
+                        <span class="profile-value">2025. 07. 06</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 인사 규칙 -->
+        <div class="rule-card">
+            <div class="section-title"><i class="fa-regular fa-hand-wave"></i> 인사 예절</div>
+            <ul>
+                <li>입장 인사 : <strong>"솜하"</strong></li>
+                <li>방종 인사 : <strong>"솜바"</strong></li>
+                <li><strong>"솜바"</strong>는 되도록 방송 종료 시에만 사용해주세요.</li>
+                <li>방송을 먼저 나가야 할 경우에는 <strong>조용히 나가셔도 괜찮습니다.</strong></li>
+            </ul>
+        </div>
+
+        <!-- 채팅 예절 -->
+        <div class="rule-card">
+            <div class="section-title"><i class="fa-regular fa-comments"></i> 채팅 예절</div>
+            <ul>
+                <li>다짜고짜 반말이나 욕설은 삼가주세요.</li>
+                <li>무지성 비난이나 과도한 욕설은 자제해주세요.</li>
+                <li>긁는 채팅은 삼가주세요.</li>
+                <li>무분별한 도배 및 광고·홍보는 금지입니다.</li>
+                <li>방송 중에 <strong>~해주세요</strong> 채팅 치지 말아주세요.</li>
+                <li>방송과 관련 없는 일기, 메모장 식의 채팅, 과도한 강요는 자제해주세요.
+                    <ul class="sub-list">
+                        <li>단, 소통 시간에는 편하게 이야기하셔도 됩니다. <strong>(단, 적정 선은 지켜주세요!)</strong></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 방송 관련 -->
+        <div class="rule-card">
+            <div class="section-title"><i class="fa-solid fa-tv"></i> 방송 관련</div>
+            <ul>
+                <li>타 스트리머 언급이나 스트리머 티 내기는 자제해주세요.
+                    <ul class="sub-list">
+                        <li>✅ 솜하치가 먼저 언급한 경우에는 괜찮습니다.</li>
+                    </ul>
+                </li>
+                <li>이 방송은 <strong>솜하치의 방송</strong>입니다.
+                    <ul class="sub-list">
+                        <li>진행 방식은 방장의 판단을 존중해주세요.</li>
+                        <li>의견이나 훈수는 제가 먼저 요청할 때 부탁드립니다.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 게임 방송 관련 -->
+        <div class="rule-card">
+            <div class="section-title"><i class="fa-solid fa-gamepad"></i> 게임 방송 관련</div>
+            <ul>
+                <li>스토리 게임에서는 <strong>스포일러 및 과도한 추측 채팅</strong>을 자제해주세요.</li>
+                <li>게임과 관련 없는 채팅은 금지입니다.</li>
+                <li>훈수는 제가 먼저 물어보거나 요청할 때만 부탁드립니다.</li>
+            </ul>
+        </div>
+
+        <!-- Outro -->
+        <div class="outro-card">
+            <h3>함께 좋은 방송 만들어가요!</h3>
+            <p>모두가 즐거운 방송을 위해 규칙을 꼭 지켜주세요.</p>
+            <p>위 사항을 지키지 않을 경우 방송 운영 방침에 따라 불이익이 있을 수 있습니다.</p>
+            <p style="margin-top: 10px;">서로를 존중하며 편안한 분위기에서 즐겨주시면 감사하겠습니다.</p>
+        </div>
+    </div>
+
+    <script>
+        const profileImageContainer = document.getElementById('profileImageContainer');
+        const imageUploadInput = document.getElementById('imageUploadInput');
+        const profileImage = document.getElementById('profileImage');
+
+        // 로컬스토리지에 저장된 커스텀 사진 불러오기
+        const savedImage = localStorage.getItem('somhachi_profile_img');
+        if (savedImage) {
+            profileImage.src = savedImage;
+        }
+
+        // 프로필 사진 클릭 시 파일 업로드 창 열기
+        profileImageContainer.addEventListener('click', () => {
+            imageUploadInput.click();
+        });
+
+        // 사진을 새로 업로드하면 영구 저장되도록 처리
+        imageUploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Image = e.target.result;
+                    profileImage.src = base64Image;
+                    try {
+                        localStorage.setItem('somhachi_profile_img', base64Image);
+                    } catch (err) {
+                        alert('이미지 용량이 너무 큽니다. 더 작은 사진을 선택해주세요.');
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
+```[cite: 1]
